@@ -36,8 +36,8 @@ Output: [1,2,3]
 
 **Language:** Python  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 19.5 MB (beats 5.77%)  
-**Submitted:** 2026-09-25T16:19:09.594Z  
+**Memory:** 19.4 MB (beats 32.01%)  
+**Submitted:** 2026-09-25T16:19:18.698Z  
 
 ```py
 # Definition for singly-linked list.
