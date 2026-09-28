@@ -35,9 +35,9 @@ Output: "10101"
 ## Solution
 
 **Language:** Python  
-**Runtime:** 3 ms (beats 41.17%)  
-**Memory:** 19.3 MB (beats 52.79%)  
-**Submitted:** 2026-09-28T18:07:33.678Z  
+**Runtime:** 0 ms  
+**Memory:** 19.4 MB  
+**Submitted:** 2026-09-28T18:08:23.031Z  
 
 ```py
 class Solution:
@@ -51,15 +51,15 @@ class Solution:
             total = carry
 
             if i >= 0:
-                total += ord(a[i]) - ord('0')
+                total += int(a[i])
                 i -= 1
 
             if j >= 0:
-                total += ord(b[j]) - ord('0')
+                total += int(b[j])
                 j -= 1
 
-            result.append(str(total % 2))
-            carry = total // 2
+            result.append(str(total & 1))
+            carry = total >> 1
 
         return ''.join(reversed(result))
 ```
