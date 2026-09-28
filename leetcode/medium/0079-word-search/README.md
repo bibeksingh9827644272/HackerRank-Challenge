@@ -51,88 +51,64 @@ Output: false
 ## Solution
 
 **Language:** Python  
-**Runtime:** 2 ms (beats 98.13%)  
+**Runtime:** 0 ms (beats 100.00%)  
 **Memory:** 19.5 MB (beats 29.10%)  
-**Submitted:** 2026-09-28T17:36:58.905Z  
+**Submitted:** 2026-09-28T17:39:25.142Z  
 
 ```py
-from collections import Counter
-
 class Solution:
     def exist(self, board, word):
         m = len(board)
         n = len(board[0])
 
         # Frequency pruning
-        board_freq = Counter()
+        count = {}
         for row in board:
-            board_freq.update(row)
+            for ch in row:
+                count[ch] = count.get(ch, 0) + 1
 
-        word_freq = Counter(word)
+        need = {}
+        for ch in word:
+            need[ch] = need.get(ch, 0) + 1
 
-        for ch, count in word_freq.items():
-            if board_freq[ch] < count:
+        for ch in need:
+            if count.get(ch, 0) < need[ch]:
                 return False
 
-        # Start from the rarer end of the word
-        if board_freq[word[0]] > board_freq[word[-1]]:
+        # Start from the rarer character
+        if count.get(word[0], 0) > count.get(word[-1], 0):
             word = word[::-1]
 
+        length = len(word)
+
         def dfs(r, c, i):
-            # Word completely matched
-            if i == len(word):
+            if i == length:
                 return True
 
-            # Boundary check
             if r < 0 or r >= m or c < 0 or c >= n:
                 return False
 
-            # Character mismatch / already visited
             if board[r][c] != word[i]:
                 return False
 
             # Mark visited
-            char = board[r][c]
+            temp = board[r][c]
             board[r][c] = '#'
 
-            next_char = word[i + 1] if i + 1 < len(word) else None
+            # Search four directions
+            if (dfs(r + 1, c, i + 1) or
+                dfs(r - 1, c, i + 1) or
+                dfs(r, c + 1, i + 1) or
+                dfs(r, c - 1, i + 1)):
+                
+                board[r][c] = temp
+                return True
 
-            # Check neighbors
-            if next_char is None:
-                found = True
-            else:
-                found = False
+            # Backtrack
+            board[r][c] = temp
+            return False
 
-                # Down
-                if (r + 1 < m and
-                    board[r + 1][c] == next_char and
-                    dfs(r + 1, c, i + 1)):
-                    found = True
-
-                # Up
-                elif (r > 0 and
-                      board[r - 1][c] == next_char and
-                      dfs(r - 1, c, i + 1)):
-                    found = True
-
-                # Right
-                elif (c + 1 < n and
-                      board[r][c + 1] == next_char and
-                      dfs(r, c + 1, i + 1)):
-                    found = True
-
-                # Left
-                elif (c > 0 and
-                      board[r][c - 1] == next_char and
-                      dfs(r, c - 1, i + 1)):
-                    found = True
-
-            # Restore cell
-            board[r][c] = char
-
-            return found
-
-        # Try possible starting cells
+        # Try every starting cell
         for r in range(m):
             for c in range(n):
                 if board[r][c] == word[0]:
