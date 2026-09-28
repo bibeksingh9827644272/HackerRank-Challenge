@@ -35,9 +35,9 @@ Output: "10101"
 ## Solution
 
 **Language:** Python  
-**Runtime:** 0 ms  
-**Memory:** 19.4 MB  
-**Submitted:** 2026-09-28T18:08:23.031Z  
+**Runtime:** 3 ms (beats 41.17%)  
+**Memory:** 19.5 MB (beats 18.15%)  
+**Submitted:** 2026-09-28T18:08:27.706Z  
 
 ```py
 class Solution:
