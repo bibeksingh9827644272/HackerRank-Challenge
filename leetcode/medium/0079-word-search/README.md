@@ -51,47 +51,90 @@ Output: false
 ## Solution
 
 **Language:** Python  
-**Runtime:** 3386 ms (beats 77.44%)  
-**Memory:** 19.3 MB (beats 84.66%)  
-**Submitted:** 2026-09-28T17:34:51.840Z  
+**Runtime:** 2 ms (beats 98.13%)  
+**Memory:** 19.5 MB (beats 29.10%)  
+**Submitted:** 2026-09-28T17:36:58.905Z  
 
 ```py
+from collections import Counter
+
 class Solution:
     def exist(self, board, word):
-        rows = len(board)
-        cols = len(board[0])
+        m = len(board)
+        n = len(board[0])
 
-        def dfs(r, c, index):
-            # All characters found
-            if index == len(word):
-                return True
+        # Frequency pruning
+        board_freq = Counter()
+        for row in board:
+            board_freq.update(row)
 
-            # Out of bounds or wrong character
-            if (r < 0 or r >= rows or
-                c < 0 or c >= cols or
-                board[r][c] != word[index]):
+        word_freq = Counter(word)
+
+        for ch, count in word_freq.items():
+            if board_freq[ch] < count:
                 return False
 
-            # Mark cell as visited
-            temp = board[r][c]
+        # Start from the rarer end of the word
+        if board_freq[word[0]] > board_freq[word[-1]]:
+            word = word[::-1]
+
+        def dfs(r, c, i):
+            # Word completely matched
+            if i == len(word):
+                return True
+
+            # Boundary check
+            if r < 0 or r >= m or c < 0 or c >= n:
+                return False
+
+            # Character mismatch / already visited
+            if board[r][c] != word[i]:
+                return False
+
+            # Mark visited
+            char = board[r][c]
             board[r][c] = '#'
 
-            # Search in 4 directions
-            found = (
-                dfs(r + 1, c, index + 1) or
-                dfs(r - 1, c, index + 1) or
-                dfs(r, c + 1, index + 1) or
-                dfs(r, c - 1, index + 1)
-            )
+            next_char = word[i + 1] if i + 1 < len(word) else None
+
+            # Check neighbors
+            if next_char is None:
+                found = True
+            else:
+                found = False
+
+                # Down
+                if (r + 1 < m and
+                    board[r + 1][c] == next_char and
+                    dfs(r + 1, c, i + 1)):
+                    found = True
+
+                # Up
+                elif (r > 0 and
+                      board[r - 1][c] == next_char and
+                      dfs(r - 1, c, i + 1)):
+                    found = True
+
+                # Right
+                elif (c + 1 < n and
+                      board[r][c + 1] == next_char and
+                      dfs(r, c + 1, i + 1)):
+                    found = True
+
+                # Left
+                elif (c > 0 and
+                      board[r][c - 1] == next_char and
+                      dfs(r, c - 1, i + 1)):
+                    found = True
 
             # Restore cell
-            board[r][c] = temp
+            board[r][c] = char
 
             return found
 
-        # Try every cell as starting point
-        for r in range(rows):
-            for c in range(cols):
+        # Try possible starting cells
+        for r in range(m):
+            for c in range(n):
                 if board[r][c] == word[0]:
                     if dfs(r, c, 0):
                         return True
