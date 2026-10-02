@@ -35,9 +35,9 @@ Output: "bb"
 ## Solution
 
 **Language:** Python  
-**Runtime:** 0 ms  
-**Memory:** 19.2 MB  
-**Submitted:** 2026-10-02T10:04:14.683Z  
+**Runtime:** 213 ms (beats 91.69%)  
+**Memory:** 19.5 MB (beats 19.23%)  
+**Submitted:** 2026-10-02T10:04:19.648Z  
 
 ```py
 class Solution:
