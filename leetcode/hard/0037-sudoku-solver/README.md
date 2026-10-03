@@ -37,9 +37,9 @@ Explanation: The input board is shown above and the only valid solution is show
 ## Solution
 
 **Language:** Python  
-**Runtime:** 2 ms  
-**Memory:** 19.3 MB  
-**Submitted:** 2026-10-03T13:55:33.654Z  
+**Runtime:** 1399 ms (beats 58.02%)  
+**Memory:** 19.2 MB (beats 99.16%)  
+**Submitted:** 2026-10-03T13:55:39.546Z  
 
 ```py
 class Solution:
