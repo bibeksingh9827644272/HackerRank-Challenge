@@ -59,9 +59,9 @@ In 2015-01-04, the temperature was higher than the previous day (20 -> 30).
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 598 ms (beats 18.90%)  
+**Runtime:** 645 ms (beats 13.10%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-10-14T15:36:16.733Z  
+**Submitted:** 2026-10-14T15:36:36.432Z  
 
 ```sql
 # Write your MySQL query statement below
