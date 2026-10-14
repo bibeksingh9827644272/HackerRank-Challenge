@@ -111,9 +111,9 @@ On 2013-10-03:
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 1018 ms (beats 5.01%)  
+**Runtime:** 758 ms (beats 13.65%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-10-14T15:37:16.254Z  
+**Submitted:** 2026-10-14T15:37:27.006Z  
 
 ```sql
 # Write your MySQL query statement below
