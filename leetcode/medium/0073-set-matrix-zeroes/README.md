@@ -47,8 +47,8 @@ Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
 
 **Language:** Python  
 **Runtime:** 8 ms (beats 33.39%)  
-**Memory:** 20.8 MB (beats 67.12%)  
-**Submitted:** 2026-10-21T17:22:56.139Z  
+**Memory:** 20.5 MB (beats 98.22%)  
+**Submitted:** 2026-10-21T17:23:24.273Z  
 
 ```py
 class Solution:
